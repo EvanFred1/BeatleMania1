@@ -7,7 +7,9 @@ public class Player : MonoBehaviour
     //Movement
     private Rigidbody2D rb;
     private Vector2 inputVec = Vector2.zero;
-    public float speed = 30.0f;
+    public float speed = 50.0f;
+
+    public GameObject bullet;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,9 +21,18 @@ public class Player : MonoBehaviour
     void Update()
     {
         inputVec = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            SpawnBullet();
+        }
     }
     private void FixedUpdate()
     {
-        rb.velocity = inputVec *speed *Time.fixedDeltaTime;
+        rb.velocity = inputVec * speed * Time.fixedDeltaTime;
+    }
+    void SpawnBullet()
+    {
+        GameObject newBullet = Instantiate(bullet);
+        newBullet.transform.position = transform.position;
     }
 }
