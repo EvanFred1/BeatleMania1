@@ -10,6 +10,10 @@ public class Player : MonoBehaviour
     public float speed = 50.0f;
 
     public GameObject bullet;
+    public float rateOfFire = 0.5f;
+    private float shootTimer = 0.0f;
+    [HideInInspector] public int bulletCounter = 0;
+    private int MaxBullets = 5;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,9 +25,15 @@ public class Player : MonoBehaviour
     void Update()
     {
         inputVec = new Vector2(Input.GetAxisRaw("Horizontal"), 0);
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && shootTimer <= 0 && bulletCounter < MaxBullets)
         {
             SpawnBullet();
+            shootTimer = rateOfFire;
+            bulletCounter++;
+        }
+        if (shootTimer > 0)
+        {
+            shootTimer -= Time.deltaTime;
         }
     }
     private void FixedUpdate()
@@ -34,5 +44,6 @@ public class Player : MonoBehaviour
     {
         GameObject newBullet = Instantiate(bullet);
         newBullet.transform.position = transform.position;
+        newBullet.GetComponent<Bullet>().player = this;
     }
 }
