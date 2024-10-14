@@ -9,11 +9,14 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+       
+    }
+    public void SetUp(Vector2 dir)
+    {
         rb = GetComponent<Rigidbody2D>();
 
-        rb.velocity = Vector3.up * 500* Time.fixedDeltaTime;
+        rb.velocity = Vector3.up * 500 * Time.fixedDeltaTime;
     }
-
     // Update is called once per frame
     void Update()
     {
@@ -21,6 +24,10 @@ public class Bullet : MonoBehaviour
     }
     private void OnDestroy()
     {
-        player.bulletCounter--;
+        if(player != null)
+        {
+            player.bulletCounter--;
+        }
+        
     }
 }

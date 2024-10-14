@@ -43,6 +43,7 @@ public class Player : MonoBehaviour
     void SpawnBullet()
     {
         GameObject newBullet = Instantiate(bullet);
+        newBullet.GetComponent<Bullet>().SetUp(Vector2.up);
         newBullet.transform.position = transform.position;
         newBullet.GetComponent<Bullet>().player = this;
     }

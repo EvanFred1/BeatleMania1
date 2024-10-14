@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using UnityEngine;
 
 public class Shell : MonoBehaviour
 {
+    [HideInInspector] public ShellSpawner spawner;
     private Rigidbody2D rb;
+    private bool wasHit = false;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = Vector2.right * Random.Range(-1f, 1f) * 20;
+
     }
 
     // Update is called once per frame
@@ -33,6 +38,16 @@ public class Shell : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Trigger Enter " + collision.gameObject.tag);
+        if (collision.gameObject.tag == "Bullet" && !wasHit)
+        {
+            Destroy(collision.gameObject);
+            Destroy(gameObject);
+            wasHit = true;
+           
+        }
+    }
+    private void OnDestroy()
+    {
+        spawner.numberOfShells--;
     }
 }
