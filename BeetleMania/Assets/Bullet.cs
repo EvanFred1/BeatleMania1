@@ -11,11 +11,11 @@ public class Bullet : MonoBehaviour
     {
        
     }
-    public void SetUp(Vector2 dir)
+    public void SetUp(Vector3 dir)
     {
         rb = GetComponent<Rigidbody2D>();
 
-        rb.velocity = Vector3.up * 500 * Time.fixedDeltaTime;
+        rb.velocity = dir * 500 * Time.fixedDeltaTime;
     }
     // Update is called once per frame
     void Update()

@@ -519,7 +519,7 @@ GameObject:
   - component: {fileID: 871562383}
   - component: {fileID: 871562382}
   - component: {fileID: 871562381}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Bullet destroyer
   m_TagString: Untagged
   m_Icon: {fileID: 0}

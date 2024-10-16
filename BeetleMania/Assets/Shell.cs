@@ -8,7 +8,7 @@ public class Shell : MonoBehaviour
     [HideInInspector] public ShellSpawner spawner;
     private Rigidbody2D rb;
     private bool wasHit = false;
-
+    public GameObject bullet;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,10 +40,24 @@ public class Shell : MonoBehaviour
     {
         if (collision.gameObject.tag == "Bullet" && !wasHit)
         {
-            Destroy(collision.gameObject);
-            Destroy(gameObject);
             wasHit = true;
+            Destroy(collision.gameObject);
            
+           
+            for(var i = 0; i < 5; i++)
+            {
+                //
+                GameObject newBullet = Instantiate(bullet);
+
+                Vector3 bulletDir = new Vector3(Random.Range(-1f,1f), Random.Range(-1f,1f),0).normalized;
+
+                newBullet.GetComponent<Bullet>().SetUp(bulletDir);
+                
+                newBullet.transform.position = transform.position;
+
+                Destroy(newBullet.gameObject, 0.25f);
+            }
+            Destroy(gameObject);
         }
     }
     private void OnDestroy()
