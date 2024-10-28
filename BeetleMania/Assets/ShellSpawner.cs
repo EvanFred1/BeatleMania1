@@ -40,5 +40,7 @@ public class ShellSpawner : MonoBehaviour
         spawnTimer = shellSpawnTime;
 
         newShell.GetComponent<Shell>().spawner = this;
+        //give shell a reference to the score script
+        newShell.GetComponent<Shell>().score = gameObject.GetComponent<Score>();
     }
 }

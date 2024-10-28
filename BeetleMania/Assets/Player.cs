@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     private float shootTimer = 0.0f;
     [HideInInspector] public int bulletCounter = 0;
     private int MaxBullets = 5;
+    
     enum States
     {
         Move,

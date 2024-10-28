@@ -9,6 +9,8 @@ public class Shell : MonoBehaviour
     private Rigidbody2D rb;
     private bool wasHit = false;
     public GameObject bullet;
+    //score 
+    [HideInInspector] public Score score;
     // Start is called before the first frame update
     void Start()
     {
@@ -63,5 +65,6 @@ public class Shell : MonoBehaviour
     private void OnDestroy()
     {
         spawner.numberOfShells--;
+        score.AddPoints();
     }
 }
