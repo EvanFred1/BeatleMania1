@@ -14,7 +14,9 @@ public class Player : MonoBehaviour
     private float shootTimer = 0.0f;
     [HideInInspector] public int bulletCounter = 0;
     private int MaxBullets = 5;
-    
+    //animation
+    public Animator animator;
+    //states
     enum States
     {
         Move,
@@ -77,7 +79,7 @@ public class Player : MonoBehaviour
             if (invincibleTimer <= 0)
             {
                 isInvincible = false;
-                GetComponent<SpriteRenderer>().color = Color.white;
+             
             }
         }
     }
@@ -94,9 +96,10 @@ public class Player : MonoBehaviour
             pressesNeeded += 2;
             pressesNeeded = Mathf.Min(pressesNeeded, 25);
 
-            GetComponent<SpriteRenderer>().color = Color.yellow;
+        
             isInvincible = true;
             invincibleTimer = 1.5f;
+            animator.SetBool("WasHit", false);
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -108,9 +111,11 @@ public class Player : MonoBehaviour
             rb.velocity = Vector3.zero;
             inputVec = Vector3.zero;
 
-            GetComponent<SpriteRenderer>().color = Color.gray;
+           
 
             shootTimer = 0;
+
+            animator.SetBool("WasHit", true);
         }
     }
 }
